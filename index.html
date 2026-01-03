@@ -1,47 +1,69 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Nuansa Tools – Free Online Converter</title>
+<title>TOOLS NUANSA – Professional Online Converter</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Nuansa Tools menyediakan berbagai alat convert online gratis: Image to PDF, PDF Merge, Text Tools, dan lainnya.">
+<meta name="description" content="TOOLS NUANSA is a professional online converter platform: Image to PDF, PDF tools, text tools, and more. Fast, secure, no install.">
 
-<!-- ADSENSE GLOBAL -->
+<!-- GOOGLE ADSENSE (GLOBAL) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5073105961173577" crossorigin="anonymous"></script>
 
-<!-- LIBRARY -->
+<!-- LIBRARIES -->
 <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
 <style>
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fa;color:#222}
-header{background:#0a7c4a;color:#fff;padding:20px;text-align:center}
-nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold}
-.container{max-width:1000px;margin:auto;padding:20px}
-.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:20px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.tool{border:1px solid #ddd;border-radius:10px;padding:15px;text-align:center;cursor:pointer;transition:.2s}
-.tool:hover{background:#e9f7f0;border-color:#0a7c4a}
-button{background:#0a7c4a;color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer}
-button:hover{opacity:.9}
-footer{background:#222;color:#ccc;text-align:center;padding:20px;margin-top:40px}
-.hidden{display:none}
+:root{
+--primary:#0a7c4a;--bg:#f4f6f9;--card:#ffffff;--text:#222;--muted:#6b7280
+}
+body.dark{--bg:#0f172a;--card:#111827;--text:#e5e7eb;--muted:#9ca3af}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,#0a7c4a,#0f9d58);color:#fff;padding:20px}
+.header-wrap{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:700}
+.nav a{color:#fff;margin-left:15px;text-decoration:none;font-weight:500}
+.controls{display:flex;gap:10px}
+.icon-btn{background:rgba(255,255,255,.15);border:none;color:#fff;padding:8px 10px;border-radius:8px;cursor:pointer}
+.container{max-width:1100px;margin:auto;padding:20px}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
+.hero-card{background:var(--card);border-radius:16px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.hero h1{margin-top:0;font-size:34px}
+.hero p{color:var(--muted);line-height:1.6}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:30px}
+.tool-card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 8px 25px rgba(0,0,0,.06);cursor:pointer;transition:.25s}
+.tool-card:hover{transform:translateY(-4px)}
+.tool-card h3{margin:10px 0 5px}
+.tool-card p{margin:0;color:var(--muted);font-size:14px}
+.page{display:none}
+.page.active{display:block}
+.card{background:var(--card);border-radius:16px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 input[type=file]{margin:15px 0}
+button.primary{background:var(--primary);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:15px;cursor:pointer}
+button.primary:hover{opacity:.9}
+footer{margin-top:60px;background:#020617;color:#9ca3af}
+.footer-wrap{max-width:1100px;margin:auto;padding:30px;text-align:center}
+.ads{margin:25px 0}
 </style>
 </head>
 <body>
 
 <header>
-<h1>Nuansa Tools</h1>
-<p>Free Online Converter Tools</p>
-<nav>
+<div class="header-wrap">
+<div class="logo">TOOLS NUANSA</div>
+<div class="nav">
 <a href="#home">Home</a>
 <a href="#tools">Tools</a>
 <a href="https://nuansa.net" target="_blank">Nuansa.net</a>
-</nav>
+</div>
+<div class="controls">
+<button class="icon-btn" onclick="toggleTheme()">🌓</button>
+<button class="icon-btn">🌐</button>
+</div>
+</div>
 </header>
 
-<!-- TOP ADS -->
-<div class="container">
+<div class="container ads">
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5073105961173577" data-ad-slot="2715110824" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
@@ -49,57 +71,72 @@ input[type=file]{margin:15px 0}
 <div class="container">
 
 <!-- HOME -->
-<div id="home" class="card">
-<h2>Selamat Datang di Nuansa Tools</h2>
-<p>Kumpulan tools online gratis untuk kebutuhan convert file, dokumen, dan teks. Tanpa install, langsung pakai.</p>
-<button onclick="location.hash='tools'">Buka Dashboard Tools</button>
+<section id="home" class="page active">
+<div class="hero">
+<div class="hero-card">
+<h1>Professional Online Converter Tools</h1>
+<p>Convert images, documents, and text instantly. No installation, no registration, fast and secure. Built for productivity.</p>
+<button class="primary" onclick="go('tools')">Open Tools Dashboard</button>
 </div>
+<div class="hero-card">
+<h3>Why TOOLS NUANSA?</h3>
+<ul>
+<li>⚡ Fast client-side processing</li>
+<li>🔒 Privacy-friendly</li>
+<li>📱 Mobile optimized</li>
+<li>💼 Professional-grade UI</li>
+</ul>
+</div>
+</div>
+</section>
 
-<!-- DASHBOARD TOOLS -->
-<div id="tools" class="card hidden">
-<h2>Dashboard Tools</h2>
-<div class="tools">
-<div class="tool" onclick="openTool('img2pdf')">🖼️ Image to PDF</div>
-<div class="tool" onclick="alert('PDF Merge menyusul (backend ready)')">📄 PDF Merge</div>
-<div class="tool" onclick="alert('Text Tools menyusul')">✍️ Text Tools</div>
+<!-- TOOLS -->
+<section id="tools" class="page">
+<h2>All Tools</h2>
+<div class="tools-grid">
+<div class="tool-card" onclick="go('img2pdf')"><h3>🖼️ Image to PDF</h3><p>Convert JPG, PNG to PDF</p></div>
+<div class="tool-card"><h3>📄 PDF Merge</h3><p>Combine multiple PDFs (soon)</p></div>
+<div class="tool-card"><h3>✍️ Text Tools</h3><p>Case, counter, formatter</p></div>
 </div>
-</div>
+</section>
 
 <!-- IMAGE TO PDF -->
-<div id="img2pdf" class="card hidden">
-<h2>Image to PDF</h2>
+<section id="img2pdf" class="page">
+<div class="card">
+<h2>Image to PDF Converter</h2>
+<p>Select multiple images and convert them into a single PDF document.</p>
 <input type="file" id="imgFiles" accept="image/*" multiple>
 <br>
-<button onclick="convertImgToPdf()">Convert ke PDF</button>
+<button class="primary" onclick="convertImgToPdf()">Convert & Download PDF</button>
 <p id="status"></p>
 </div>
+</section>
 
 </div>
 
-<!-- FOOTER ADS -->
-<div class="container">
+<div class="container ads">
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5073105961173577" data-ad-slot="4698276339" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
 </div>
 
 <footer>
-<p>© 2026 Nuansa Tools · Powered by nuansa.net</p>
+<div class="footer-wrap">
+<p>© 2026 TOOLS NUANSA · Powered by Nuansa.net</p>
+</div>
 </footer>
 
 <script>
-function show(id){document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
-function router(){const h=location.hash.replace('#','')||'home';show(h)}
-window.addEventListener('hashchange',router);router();
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');location.hash=id}
+window.addEventListener('load',()=>{const h=location.hash.replace('#','');if(h)go(h)})
+function toggleTheme(){document.body.classList.toggle('dark')}
 
 async function convertImgToPdf(){
  const files=document.getElementById('imgFiles').files;
- if(!files.length){alert('Pilih gambar dulu');return}
+ if(!files.length){alert('Please select image files');return}
  const pdfDoc=await PDFLib.PDFDocument.create();
  for(const file of files){
   const bytes=await file.arrayBuffer();
-  let img;
-  if(file.type.includes('png')) img=await pdfDoc.embedPng(bytes);
-  else img=await pdfDoc.embedJpg(bytes);
+  const img=file.type.includes('png')?await pdfDoc.embedPng(bytes):await pdfDoc.embedJpg(bytes);
   const page=pdfDoc.addPage([img.width,img.height]);
   page.drawImage(img,{x:0,y:0,width:img.width,height:img.height});
  }
@@ -107,9 +144,9 @@ async function convertImgToPdf(){
  const blob=new Blob([pdfBytes],{type:'application/pdf'});
  const a=document.createElement('a');
  a.href=URL.createObjectURL(blob);
- a.download='nuansa-image-to-pdf.pdf';
+ a.download='tools-nuansa-image-to-pdf.pdf';
  a.click();
- document.getElementById('status').innerText='PDF berhasil dibuat';
+ document.getElementById('status').innerText='Conversion completed successfully.';
 }
 </script>
 
