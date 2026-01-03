@@ -84,6 +84,11 @@ footer{background:#020617;color:#9ca3af;margin-top:60px}
 </div>
 </section>
 
+<!-- SEO CONTENT -->
+<section id="seoContent" class="page">
+<div class="card" id="seoText"></div>
+</section>
+
 </div>
 
 <div class="container ads">
@@ -131,6 +136,41 @@ function openTool(t){
 
 function updateSEO(t){
  document.title = `${t.name} – TOOLS NUANSA`;
+ document.getElementById('dynamicDesc').setAttribute('content',t.desc);
+ const schema={
+  '@context':'https://schema.org',
+  '@type':'SoftwareApplication',
+  'name':t.name,
+  'operatingSystem':'Web',
+  'applicationCategory':'UtilityApplication',
+  'description':t.desc,
+  'url':location.href
+ };
+ document.getElementById('schemaTool').textContent=JSON.stringify(schema);
+ document.getElementById('seoText').innerHTML = generateSEOContent(t);
+}
+
+function generateSEOContent(t){
+ return `<h3>About ${t.name}</h3>
+ <p>${t.desc} This online tool is part of TOOLS NUANSA, a professional platform providing more than 100 online utilities designed for productivity, SEO, document management, and web optimization.</p>
+ <p>${t.name} is optimized for speed, privacy, and ease of use. No installation required, works directly in your browser.</p>
+ <h4>Why use ${t.name}?</h4>
+ <ul>
+ <li>Fast and lightweight</li>
+ <li>Free to use</li>
+ <li>Secure and privacy-friendly</li>
+ <li>Accessible on all devices</li>
+ </ul>
+ <p>Explore other tools on TOOLS NUANSA to maximize your workflow efficiency.</p>`;
+}
+
+function buildSitemap(){
+ let urls = tools.map(t=>`<url><loc>${location.origin}/?tool=${t.slug}</loc></url>`).join('');
+ const xml = `<?xml version="1.0" encoding="UTF-8"?>
+ <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`;
+ console.log(xml);
+}
+ – TOOLS NUANSA`;
  document.getElementById('dynamicDesc').setAttribute('content',t.desc);
  const schema={
   '@context':'https://schema.org',
