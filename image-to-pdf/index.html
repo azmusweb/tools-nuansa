@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image to PDF Converter – TOOLS NUANSA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert images to PDF with custom size, orientation, and quality.">
+
+  <!-- Google AdSense (WAJIB & SATU KALI) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5073105961173577"
+     crossorigin="anonymous"></script>
+
+  <!-- PDF Engine -->
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+  <style>
+    body{margin:0;font-family:system-ui;background:#f4f6f8}
+    header{background:#16a34a;color:#fff;padding:16px 24px;font-weight:800}
+    main{max-width:900px;margin:auto;padding:24px}
+    .box{background:#fff;border-radius:16px;padding:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    label{display:block;margin-top:14px;font-weight:600}
+    select,input[type=file]{width:100%;padding:8px;margin-top:6px}
+    button{margin-top:20px;background:#16a34a;color:#fff;border:none;padding:12px 18px;border-radius:10px;cursor:pointer}
+    .ads{margin:24px 0;text-align:center}
+    footer{text-align:center;padding:20px;opacity:.6}
+  </style>
+</head>
+<body>
+
+<header>
+  Image to PDF Converter – TOOLS NUANSA
+</header>
+
+<main>
+
+  <!-- TOP ADS -->
+  <div class="ads">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5073105961173577"
+         data-ad-slot="2715110824"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+
+  <div class="box">
+    <h2>Convert Image to PDF</h2>
+
+    <label>Select Images</label>
+    <input type="file" id="images" accept="image/*" multiple>
+
+    <label>Paper Size</label>
+    <select id="size">
+      <option value="auto">Auto</option>
+      <option value="a4">A4</option>
+      <option value="letter">Letter</option>
+    </select>
+
+    <label>Orientation</label>
+    <select id="orientation">
+      <option value="portrait">Portrait</option>
+      <option value="landscape">Landscape</option>
+    </select>
+
+    <button onclick="convert()">Convert to PDF</button>
+  </div>
+
+  <!-- FOOTER ADS -->
+  <div class="ads">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5073105961173577"
+         data-ad-slot="4698276339"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 tools.nuansa.net
+</footer>
+
+<script>
+async function convert(){
+  const files = document.getElementById('images').files;
+  if(!files.length){ alert('Please select images'); return; }
+
+  const pdfDoc = await PDFLib.PDFDocument.create();
+
+  for(const file of files){
+    const bytes = await file.arrayBuffer();
+    const img = file.type.includes('png')
+      ? await pdfDoc.embedPng(bytes)
+      : await pdfDoc.embedJpg(bytes);
+
+    const page = pdfDoc.addPage([img.width, img.height]);
+    page.drawImage(img,{x:0,y:0,width:img.width,height:img.height});
+  }
+
+  const pdfBytes = await pdfDoc.save();
+  const blob = new Blob([pdfBytes],{type:'application/pdf'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'images.pdf';
+  a.click();
+}
+</script>
+
+</body>
+</html>
