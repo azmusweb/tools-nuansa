@@ -145,15 +145,16 @@
       <button>Convert</button>
     </div>
     <div class="tool">
-      <h3>PDF OCR</h3>
-      <input type="file" accept="application/pdf,image/*" />
-      <button>Extract Text</button>
-    </div>
+  <h3>PDF / Image OCR</h3>
+  <input type="file" id="ocrInput" accept="application/pdf,image/*" />
+  <button onclick="runOCR()">Extract Text</button>
+  <pre id="ocrResult" style="white-space:pre-wrap;font-size:12px"></pre>
+</div>
     <div class="tool">
-      <h3>Image to PDF</h3>
-      <input type="file" accept="image/*" multiple />
-      <button>Create PDF</button>
-    </div>
+  <h3>Image to PDF</h3>
+  <input type="file" id="imgPdfInput" accept="image/*" multiple />
+  <button onclick="imageToPdf()">Convert</button>
+</div>
     <div class="tool">
       <h3>Word to PDF</h3>
       <input type="file" accept=".doc,.docx" />
@@ -201,7 +202,36 @@
       el.textContent = el.dataset[currentLang];
     })
   }
-</script>
+// ===== FUNCTIONAL TOOLS =====
+async function imageToPdf(){
+  const files = document.getElementById('imgPdfInput').files;
+  if(!files.length){ alert('Select image first'); return; }
+  const pdfDoc = await PDFLib.PDFDocument.create();
+  for(const file of files){
+    const bytes = await file.arrayBuffer();
+    const img = file.type.includes('png') ? await pdfDoc.embedPng(bytes) : await pdfDoc.embedJpg(bytes);
+    const page = pdfDoc.addPage([img.width, img.height]);
+    page.drawImage(img,{x:0,y:0,width:img.width,height:img.height});
+  }
+  const pdfBytes = await pdfDoc.save();
+  downloadFile(pdfBytes,'images.pdf','application/pdf');
+}
 
+async function runOCR(){
+  const file = document.getElementById('ocrInput').files[0];
+  if(!file){ alert('Select file first'); return; }
+  document.getElementById('ocrResult').textContent='Processing OCR...';
+  const { data:{ text } } = await Tesseract.recognize(file,'eng');
+  document.getElementById('ocrResult').textContent=text;
+}
+
+function downloadFile(bytes, filename, type){
+  const blob = new Blob([bytes],{type});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+</script>
 </body>
 </html>
