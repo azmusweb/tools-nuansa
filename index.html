@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOOLS NUANSA – Free Online Converter Tools</title>
+  <meta name="description" content="TOOLS NUANSA provides free online tools: PDF to Word, PDF OCR, Image to PDF, Text tools, and more." />
+
+  <!-- Adsense Placeholder -->
+  <!-- PASTE YOUR ADSENSE SCRIPT HERE -->
+
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --text: #1f2937;
+      --card: #ffffff;
+      --primary: #16a34a;
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #e5e7eb;
+      --card: #020617;
+      --primary: #22c55e;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: var(--card);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--primary);
+    }
+    .actions button {
+      margin-left: 8px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    main {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .hero h1 { font-size: 36px; margin-bottom: 10px; }
+    .hero p { opacity: .8 }
+
+    .ads-top, .ads-middle {
+      margin: 25px 0;
+      text-align: center;
+      background: #e5e7eb33;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .tool {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+    .tool h3 { margin-top: 0 }
+    .tool input {
+      width: 100%;
+      margin: 10px 0;
+    }
+    .tool button {
+      background: var(--primary);
+      border: none;
+      padding: 10px 14px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      opacity: .7;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">TOOLS NUANSA</div>
+  <div class="actions">
+    <button onclick="toggleTheme()">🌙</button>
+    <button onclick="toggleLang()">🌐</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1 data-en="All-in-One Online Converter Tools" data-id="Semua Tools Konversi Online">All-in-One Online Converter Tools</h1>
+    <p data-en="Fast, private, and free tools directly in your browser." data-id="Cepat, aman, dan gratis langsung di browser.">
+      Fast, private, and free tools directly in your browser.
+    </p>
+  </div>
+
+  <div class="ads-top">
+    <!-- ADSENSE TOP SLOT -->
+    PASTE ADSENSE TOP BANNER HERE
+  </div>
+
+  <div class="grid">
+    <div class="tool">
+      <h3>PDF to Word</h3>
+      <input type="file" accept="application/pdf" />
+      <button>Convert</button>
+    </div>
+    <div class="tool">
+      <h3>PDF OCR</h3>
+      <input type="file" accept="application/pdf,image/*" />
+      <button>Extract Text</button>
+    </div>
+    <div class="tool">
+      <h3>Image to PDF</h3>
+      <input type="file" accept="image/*" multiple />
+      <button>Create PDF</button>
+    </div>
+    <div class="tool">
+      <h3>Word to PDF</h3>
+      <input type="file" accept=".doc,.docx" />
+      <button>Convert</button>
+    </div>
+    <div class="tool">
+      <h3>Text Tools</h3>
+      <textarea rows="4" placeholder="Paste text here"></textarea>
+      <button>Process</button>
+    </div>
+  </div>
+
+  <div class="ads-middle">
+    <!-- ADSENSE IN-CONTENT -->
+    PASTE ADSENSE IN CONTENT HERE
+  </div>
+</main>
+
+<footer>
+  © 2026 TOOLS NUANSA · tools.nuansa.net
+</footer>
+
+<script>
+  function toggleTheme(){
+    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark';
+  }
+  let currentLang = 'en';
+  function toggleLang(){
+    currentLang = currentLang === 'en' ? 'id' : 'en';
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      el.textContent = el.dataset[currentLang];
+    })
+  }
+</script>
+
+</body>
+</html>
