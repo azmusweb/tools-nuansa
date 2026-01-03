@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>TOOLS NUANSA – Ultimate Online Tools Platform</title>
+<title id="dynamicTitle">TOOLS NUANSA – Ultimate Online Tools Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="TOOLS NUANSA is a super powerful online tools platform with 100+ converters, generators, and utilities.">
+<meta name="description" id="dynamicDesc" content="TOOLS NUANSA is a super powerful online tools platform with 100+ converters, generators, and utilities.">
 
 <!-- GOOGLE ADSENSE (GLOBAL – APPROVED DOMAIN INHERITED) -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5073105961173577" crossorigin="anonymous"></script>
@@ -38,6 +38,7 @@ button.primary{background:var(--primary);color:#fff;border:none;padding:12px 20p
 footer{background:#020617;color:#9ca3af;margin-top:60px}
 .footer-wrap{max-width:1200px;margin:auto;padding:30px;text-align:center}
 </style>
+<script type="application/ld+json" id="schemaTool"></script>
 </head>
 <body>
 <header>
@@ -105,6 +106,11 @@ function toggleTheme(){document.body.classList.toggle('dark')}
 
 /* ===================== TOOLS DATABASE (100+) ===================== */
 const tools=[
+ {id:'image-to-pdf',slug:'image-to-pdf',name:'Image to PDF Converter',desc:'Convert images (JPG, PNG) to PDF online for free.',keywords:'image to pdf, jpg to pdf, png to pdf'},
+ {id:'pdf-merge',slug:'pdf-merge',name:'PDF Merge',desc:'Merge multiple PDF files into one document.',keywords:'pdf merge, combine pdf'},
+ {id:'text-case-converter',slug:'text-case-converter',name:'Text Case Converter',desc:'Convert text to uppercase, lowercase, sentence case.',keywords:'text case converter, uppercase lowercase'},
+ ...Array.from({length:97},(_,i)=>({id:'tool'+(i+4),slug:'online-tool-'+(i+4),name:'Online Tool '+(i+4),desc:'Free online utility tool number '+(i+4)+'.',keywords:'online tool '+(i+4)}))
+];
  {id:'img2pdf',name:'Image to PDF',desc:'Convert images to PDF',ui:()=>`<input type=file multiple accept=image/*><br><button class=primary>Convert</button>`},
  {id:'pdfmerge',name:'PDF Merge',desc:'Merge multiple PDFs',ui:()=>`<p>Backend ready</p>`},
  // --- AUTO GENERATED TOOLS ---
@@ -114,7 +120,38 @@ const tools=[
 const grid=document.getElementById('toolsGrid');
 tools.forEach(t=>{const d=document.createElement('div');d.className='tool-card';d.innerHTML=`<h3>${t.name}</h3><p>${t.desc}</p>`;d.onclick=()=>openTool(t);grid.appendChild(d)})
 
-function openTool(t){document.getElementById('toolTitle').innerText=t.name;document.getElementById('toolDesc').innerText=t.desc;document.getElementById('toolUI').innerHTML=t.ui();go('toolPage')}
+function openTool(t){
+ document.getElementById('toolTitle').innerText=t.name;
+ document.getElementById('toolDesc').innerText=t.desc;
+ document.getElementById('toolUI').innerHTML=t.ui?t.ui():`<p>This tool is ready for activation.</p>`;
+ go('toolPage');
+ updateSEO(t);
+ history.pushState({},'',`?tool=${t.slug}`);
+}
+
+function updateSEO(t){
+ document.title = `${t.name} – TOOLS NUANSA`;
+ document.getElementById('dynamicDesc').setAttribute('content',t.desc);
+ const schema={
+  '@context':'https://schema.org',
+  '@type':'SoftwareApplication',
+  'name':t.name,
+  'operatingSystem':'Web',
+  'applicationCategory':'UtilityApplication',
+  'description':t.desc,
+  'url':location.href
+ };
+ document.getElementById('schemaTool').textContent=JSON.stringify(schema);
+}
+
+window.addEventListener('load',()=>{
+ const p=new URLSearchParams(location.search);
+ const slug=p.get('tool');
+ if(slug){
+  const tool=tools.find(t=>t.slug===slug);
+  if(tool) openTool(tool);
+ }
+});
 </script>
 </body>
 </html>
